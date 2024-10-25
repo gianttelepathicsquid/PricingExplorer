@@ -89,76 +89,78 @@ const PricingExplorer = () => {
   };
 
   return (
-    <Card className="w-full max-w-4xl">
-      <CardHeader className="border-b border-gray-200">
-        <CardTitle className="flex items-center gap-2 text-2xl text-black">
-          <div className="flex items-center gap-4">
-            <Package className="h-8 w-8 text-sky-500" />
-            Quetico 3PL Services Pricing Explorer
-          </div>
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="p-6">
-        <div className="space-y-4">
-          {services.map((service) => {
-            const Icon = service.icon;
-            const isExpanded = expandedCategory === service.id;
-            
-            return (
-              <div
-                key={service.id}
-                className="border border-gray-200 rounded-lg overflow-hidden transition-all duration-300"
-              >
-                <button
-                  onClick={() => toggleCategory(service.id)}
-                  className={`w-full p-4 flex items-center justify-between bg-gray-50 hover:bg-gray-100 transition-colors`}
-                >
-                  <div className="flex items-center gap-3">
-                    <Icon className="h-6 w-6 text-sky-500" />
-                    <span className="font-semibold text-black">{service.title}</span>
-                  </div>
-                  {isExpanded ? (
-                    <ChevronUp className="h-5 w-5 text-sky-500" />
-                  ) : (
-                    <ChevronDown className="h-5 w-5 text-sky-500" />
-                  )}
-                </button>
-                
+    <div className="min-h-screen bg-gray-50 p-8">
+      <Card className="w-full max-w-4xl mx-auto shadow-lg">
+        <CardHeader className="border-b border-gray-200 bg-white">
+          <CardTitle className="flex items-center gap-2 text-2xl">
+            <div className="flex items-center gap-4">
+              <Package className="h-8 w-8 text-sky-500" />
+              <span className="font-bold text-gray-800">Quetico 3PL Services Pricing Explorer</span>
+            </div>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-6 bg-white">
+          <div className="space-y-4">
+            {services.map((service) => {
+              const Icon = service.icon;
+              const isExpanded = expandedCategory === service.id;
+              
+              return (
                 <div
-                  className={`overflow-hidden transition-all duration-300 ${
-                    isExpanded ? 'max-h-[500px]' : 'max-h-0'
-                  }`}
+                  key={service.id}
+                  className="border border-gray-200 rounded-lg overflow-hidden transition-all duration-300 bg-white shadow-sm hover:shadow-md"
                 >
-                  <div className="p-4 bg-white">
-                    <table className="w-full">
-                      <thead>
-                        <tr className="text-left text-sm text-black">
-                          <th className="pb-2 font-semibold">Service</th>
-                          <th className="pb-2 font-semibold">Price Range</th>
-                          <th className="pb-2 font-semibold">Average</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {service.details.map((detail, idx) => (
-                          <tr
-                            key={idx}
-                            className="border-t border-gray-200"
-                          >
-                            <td className="py-2 text-black">{detail.name}</td>
-                            <td className="py-2 text-black">{detail.range}</td>
-                            <td className="py-2 text-black">{detail.avg}</td>
+                  <button
+                    onClick={() => toggleCategory(service.id)}
+                    className={`w-full p-4 flex items-center justify-between bg-white hover:bg-gray-50 transition-colors`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="bg-sky-100 p-2 rounded-lg">
+                        <Icon className="h-5 w-5 text-sky-600" />
+                      </div>
+                      <span className="font-semibold text-gray-800">{service.title}</span>
+                    </div>
+                    <div className={`transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}>
+                      <ChevronDown className="h-5 w-5 text-gray-400" />
+                    </div>
+                  </button>
+                  
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      isExpanded ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <div className="p-4 bg-gray-50 border-t border-gray-200">
+                      <table className="w-full">
+                        <thead>
+                          <tr className="text-left text-sm text-gray-600">
+                            <th className="pb-3 font-semibold">Service</th>
+                            <th className="pb-3 font-semibold">Price Range</th>
+                            <th className="pb-3 font-semibold">Average</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody className="divide-y divide-gray-200">
+                          {service.details.map((detail, idx) => (
+                            <tr
+                              key={idx}
+                              className="text-sm"
+                            >
+                              <td className="py-3 text-gray-800">{detail.name}</td>
+                              <td className="py-3 text-gray-800">{detail.range}</td>
+                              <td className="py-3 text-gray-800">{detail.avg}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-      </CardContent>
-    </Card>
+              );
+            })}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { ChevronDown, ChevronUp, Package, Truck, Warehouse, Settings, RefreshCcw, Plane } from 'lucide-react';
@@ -82,7 +84,7 @@ const PricingExplorer = () => {
     }
   ];
 
-  const toggleCategory = (id) => {
+  const toggleCategory = (id: number) => {
     setExpandedCategory(expandedCategory === id ? null : id);
   };
 

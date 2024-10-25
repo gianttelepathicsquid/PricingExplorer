@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { ChevronDown, ChevronUp, Package, Truck, Warehouse, Settings, RefreshCcw, Plane } from 'lucide-react';
 
 const PricingExplorer = () => {
-  const [expandedCategory, setExpandedCategory] = useState(null);
+  const [expandedCategory, setExpandedCategory] = useState<number | null>(null);
 
   const services = [
     {
@@ -85,7 +85,7 @@ const PricingExplorer = () => {
   ];
 
   const toggleCategory = (id: number) => {
-    setExpandedCategory(expandedCategory === id ? null : id);
+    setExpandedCategory(prev => prev === id ? null : id);
   };
 
   return (
